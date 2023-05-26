@@ -79,7 +79,7 @@ const SecondsCounter = () => {
   };
 
   return (
-    <div className="card p-5 bg-dark text-light rounded shadow-lg">
+    <div className="card p-5 bg-dark text-light rounded shadow-lg font-monospace">
       <h2 className="display-5 text-center">{mode} Mode</h2>
       <h1 className="display-1 text-center">
         {countDown === 0 ? `${seconds}` : `${countDown}`}
