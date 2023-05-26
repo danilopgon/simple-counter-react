@@ -8,6 +8,7 @@ const SecondsCounter = () => {
   const [paused, setPaused] = useState(false);
   const [alarmValue, setAlarmValue] = useState(null);
   const [alarm, setAlarm] = useState(null);
+  const [disabled, setDisabled] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,11 +40,13 @@ const SecondsCounter = () => {
         setCountDown((countDown) => countDown - 1);
       }, 1000);
       setMode("Countdown");
+      setDisabled("disabled");
       return () => clearTimeout(timeout);
     }
     setSeconds(0);
     setMode("Timer");
     setPaused(false);
+    setDisabled("");
   }, [countDown]);
 
   useEffect(() => {
@@ -86,11 +89,11 @@ const SecondsCounter = () => {
         role="group"
         aria-label="..."
       >
-        {" "}
         <button
           type="button"
           className="btn btn-outline-light"
           onClick={resetTimer}
+          disabled={disabled}
         >
           Reset
         </button>
@@ -98,6 +101,7 @@ const SecondsCounter = () => {
           type="button"
           className="btn btn-outline-light"
           onClick={stopTimer}
+          disabled={disabled}
         >
           Pause
         </button>
@@ -105,6 +109,7 @@ const SecondsCounter = () => {
           type="button"
           className="btn btn-outline-light"
           onClick={startTimer}
+          disabled={disabled}
         >
           Start
         </button>
