@@ -52,9 +52,9 @@ const SecondsCounter = () => {
   useEffect(() => {
     if (seconds === alarm) {
       alert("It's time!");
+      setAlarm(null);
     }
-    setAlarm(null);
-  });
+  }, [seconds, alarm]);
 
   const handleCountdownInput = (event) => {
     setCountDownValue(event.target.value);
