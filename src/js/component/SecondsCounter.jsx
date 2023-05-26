@@ -58,8 +58,12 @@ const SecondsCounter = () => {
   };
 
   const startCountdown = () => {
-    setCountDown(parseInt(countDownValue));
-    setCountDownValue(null);
+    const parsedCountDownValue = parseInt(countDownValue);
+    if (parsedCountDownValue > 0) {
+      setCountDown(parsedCountDownValue);
+      setMode("Countdown");
+      setCountDownValue(null);
+    }
   };
 
   const handleAlarmInput = (event) => {
@@ -72,7 +76,7 @@ const SecondsCounter = () => {
   };
 
   return (
-    <div className="card p-5 bg-dark text-light rounded">
+    <div className="card p-5 bg-dark text-light rounded shadow-lg">
       <h2 className="display-5 text-center">{mode} Mode</h2>
       <h1 className="display-1 text-center">
         {countDown === 0 ? `${seconds}` : `${countDown}`}
@@ -112,7 +116,8 @@ const SecondsCounter = () => {
           aria-label="Sizing example input"
           aria-describedby="inputGroup-sizing-default"
           onChange={handleCountdownInput}
-          value={countDownValue !== null ? countDownValue : ""} // Set the value attribute
+          value={countDownValue !== null ? countDownValue : ""}
+          required
         />
         <button
           className="input-group-text"
@@ -129,7 +134,7 @@ const SecondsCounter = () => {
           aria-label="Sizing example input"
           aria-describedby="inputGroup-sizing-default"
           onChange={handleAlarmInput}
-          value={alarmValue !== null ? alarmValue : ""} // Set the value attribute
+          value={alarmValue !== null ? alarmValue : ""}
         />
         <button
           className="input-group-text"
