@@ -92,16 +92,24 @@ const SecondsCounter = () => {
   return (
     <>
       <h2 className="display-5 text-center my-3 ">{mode} Mode</h2>
-      <div className="card-group text-dark display-2 my-3 ">
+      <div className="card-group text-dark display-2 my-3 d-flex">
         <div className="card p-3 text-center">
           <FontAwesomeIcon icon={faClock} />
         </div>
         {countDown === 0
-          ? castTimeToString(seconds).map((number) => {
-              return <div className="card p-3 text-center">{number}</div>;
+          ? castTimeToString(seconds).map((number, key) => {
+              return (
+                <div className="card p-3 text-center" key={key}>
+                  {number}
+                </div>
+              );
             })
-          : castTimeToString(countDown).map((number) => {
-              return <div className="card p-3 text-center">{number}</div>;
+          : castTimeToString(countDown).map((number, key) => {
+              return (
+                <div className="card p-3 text-center" key={key}>
+                  {number}
+                </div>
+              );
             })}
       </div>
       <div
