@@ -92,7 +92,7 @@ const SecondsCounter = () => {
   return (
     <>
       <h2 className="display-5 text-center my-3 ">{mode} Mode</h2>
-      <div className="card-group text-dark display-2 my-3 d-flex">
+      <div className="card-group text-dark h3 my-3 d-flex justify-content-center">
         <div className="card p-3 text-center">
           <FontAwesomeIcon icon={faClock} />
         </div>
