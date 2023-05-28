@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import CounterInput from "./CounterInput.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 
 const SecondsCounter = () => {
   const [seconds, setSeconds] = useState(0);
@@ -78,14 +81,31 @@ const SecondsCounter = () => {
     setAlarmValue(null);
   };
 
+  const castTimeToString = (timeNumber) => {
+    let charsArray = [];
+    let textNumber = timeNumber.toString();
+    textNumber = textNumber.padStart(6, "000000");
+    charsArray = textNumber.split("");
+    return charsArray;
+  };
+
   return (
-    <div className="card p-5 bg-dark text-light rounded shadow-lg font-monospace">
-      <h2 className="display-5 text-center">{mode} Mode</h2>
-      <h1 className="display-1 text-center">
-        {countDown === 0 ? `${seconds}` : `${countDown}`}
-      </h1>
+    <>
+      <h2 className="display-5 text-center my-3 ">{mode} Mode</h2>
+      <div className="card-group text-dark display-2 my-3 ">
+        <div className="card p-3 text-center">
+          <FontAwesomeIcon icon={faClock} />
+        </div>
+        {countDown === 0
+          ? castTimeToString(seconds).map((number) => {
+              return <div className="card p-3 text-center">{number}</div>;
+            })
+          : castTimeToString(countDown).map((number) => {
+              return <div className="card p-3 text-center">{number}</div>;
+            })}
+      </div>
       <div
-        className="btn-group btn-group-lg my-3"
+        className="btn-group btn-group-lg w-100 my-3 "
         role="group"
         aria-label="..."
       >
@@ -114,42 +134,20 @@ const SecondsCounter = () => {
           Start
         </button>
       </div>
-      <div className="input-group my-3">
-        <input
-          type="number"
-          className="form-control"
-          aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-default"
-          onChange={handleCountdownInput}
-          value={countDownValue !== null ? countDownValue : ""}
-          required
-        />
-        <button
-          className="input-group-text"
-          onClick={startCountdown}
-          id="countdownButton"
-        >
-          Set countdown
-        </button>
-      </div>
-      <div className="input-group my-3">
-        <input
-          type="number"
-          className="form-control"
-          aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-default"
-          onChange={handleAlarmInput}
-          value={alarmValue !== null ? alarmValue : ""}
-        />
-        <button
-          className="input-group-text"
-          onClick={startAlarm}
-          id="countdownButton"
-        >
-          Set alarm
-        </button>
-      </div>
-    </div>
+      <CounterInput
+        onChange={handleCountdownInput}
+        value={countDownValue !== null ? countDownValue : ""}
+        onClick={startCountdown}
+        text={"Set countdown"}
+      />
+
+      <CounterInput
+        onChange={handleAlarmInput}
+        value={alarmValue !== null ? alarmValue : ""}
+        onClick={startAlarm}
+        text={"Set alarm"}
+      />
+    </>
   );
 };
 

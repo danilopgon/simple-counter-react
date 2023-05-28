@@ -4,9 +4,9 @@ import SecondsCounter from "./SecondsCounter.jsx";
 //create your first component
 const Home = () => {
   return (
-    <div className="container-fluid">
-      <div className="row vh-100">
-        <div className="col-12 d-flex align-items-center justify-content-center">
+    <div className="container-fluid min-vh-100 d-flex align-items-center justify-content-center font-monospace">
+      <div className="row">
+        <div className="col-12 bg-dark text-light d-flex flex-column p-3 rounded">
           <SecondsCounter />
         </div>
       </div>
