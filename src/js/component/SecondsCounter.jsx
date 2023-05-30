@@ -59,10 +59,6 @@ const SecondsCounter = () => {
     }
   }, [seconds, alarm]);
 
-  const handleCountdownInput = (event) => {
-    setCountDownValue(event.target.value);
-  };
-
   const startCountdown = () => {
     const parsedCountDownValue = parseInt(countDownValue);
     if (parsedCountDownValue > 0) {
@@ -71,11 +67,6 @@ const SecondsCounter = () => {
       setCountDownValue(null);
     }
   };
-
-  const handleAlarmInput = (event) => {
-    setAlarmValue(event.target.value);
-  };
-
   const startAlarm = () => {
     setAlarm(parseInt(alarmValue));
     setAlarmValue(null);
@@ -143,14 +134,18 @@ const SecondsCounter = () => {
         </button>
       </div>
       <CounterInput
-        onChange={handleCountdownInput}
+        onChange={(event) => {
+          setCountDownValue(event.target.value);
+        }}
         value={countDownValue !== null ? countDownValue : ""}
         onClick={startCountdown}
         text={"Set countdown"}
       />
 
       <CounterInput
-        onChange={handleAlarmInput}
+        onChange={(event) => {
+          setAlarmValue(event.target.value);
+        }}
         value={alarmValue !== null ? alarmValue : ""}
         onClick={startAlarm}
         text={"Set alarm"}
